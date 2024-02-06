@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+#app {
+    max-width: 800px;
+    margin: 20px auto; /* Ajuste de margen para centrar #app */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#fotos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.foto {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+}
+
+#boton {
+    text-align: center; /* Alinear el botón al centro */
+    margin-top: 20px; /* Espacio entre #app y el botón */
+}
+
+button {
+    padding: 10px 20px; /* Ajuste del padding */
+    background-color: #12051a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Espacio entre los elementos */
+    display: block; /* Hacer que el botón ocupe todo el ancho */
+    margin-left: auto; /* Alinear el botón al centro */
+    margin-right: auto; /* Alinear el botón al centro */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
