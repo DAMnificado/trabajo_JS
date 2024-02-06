@@ -29,7 +29,7 @@ async function fetchPhotos() {
     }
 }
 
-// Función para obtener los usuarios desde la API
+// Función para obtener los comentarios desde la API
 async function fetchComments() {
     try {
         // Obtengo los datos de los comentarios desde la API
