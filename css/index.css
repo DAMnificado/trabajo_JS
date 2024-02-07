@@ -27,12 +27,19 @@ body {
     margin: 10px;
 }
 
-#boton {
-    text-align: center; /* Alinear el botón al centro */
-    margin-top: 20px; /* Espacio entre #app y el botón */
+#searchContainer {
+    text-align: center; /* Centrar el contenedor */
+    margin-top: 20px; /* Espacio entre #app y el contenedor de búsqueda */
 }
 
-button {
+#searchInput {
+    padding: 10px; /* Ajuste del padding */
+    margin-right: 2px; /* Margen derecho para separar el input del botón */
+    border-radius: 4px; /* Ajuste del borde */
+    border: 1px solid #ccc; /* Ajuste del borde */
+}
+
+#botonBusqueda {
     padding: 10px 20px; /* Ajuste del padding */
     background-color: #12051a;
     color: #fff;
@@ -40,12 +47,24 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px; /* Espacio entre los elementos */
-    display: block; /* Hacer que el botón ocupe todo el ancho */
-    margin-left: auto; /* Alinear el botón al centro */
-    margin-right: auto; /* Alinear el botón al centro */
 }
 
-button:hover {
+#botonBusqueda:hover {
+    background-color: #0056b3;
+}
+
+#saberMasBtn {
+    margin-right: 100px; 
+    padding: 10px 20px; /* Ajuste del padding */
+    background-color: #12051a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Espacio entre la barra de búsqueda y el botón "Saber más" */
+}
+
+#saberMasBtn:hover {
     background-color: #0056b3;
 }

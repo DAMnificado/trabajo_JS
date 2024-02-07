@@ -42,28 +42,34 @@ fetch(`${API_URL}/users`)
     })
     .catch(error => console.error('Error al obtener mis usuarios:', error)); // Registro cualquier error que ocurra durante la operación fetch
 
+    
+function manejarBusqueda() {
+    const searchTerm = searchInput.value.toLowerCase(); // Obtener el término de búsqueda en minúsculas
 
+    // Realizar la solicitud a la API para obtener los datos de los usuarios
+    fetch(`${API_URL}/users`)
+        .then((respuesta) => respuesta.json()) // Parsear la respuesta como JSON
+        .then((usuarios) => {
+            // Verificar si el nombre ingresado por el usuario está presente en los datos de los usuarios
+            const usuarioEncontrado = usuarios.find(usuario => usuario.name.toLowerCase() === searchTerm);
 
+            if (usuarioEncontrado) {
+                // Si se encuentra el usuario, redirigir a la otra página
+                // y pasar el correo del usuario como parámetro de la URL
+                window.location.href = `index3.html?correo=${usuarioEncontrado.email}`;
+            } else {
+                // Si no se encuentra el usuario, mostrar un mensaje de error
+                alert("El nombre ingresado no existe");
+            }
+        })
+        .catch(error => console.error('Error al obtener los datos de los usuarios:', error)); // Manejar errores de la solicitud a la API
+}
 
 searchInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
-        const searchTerm = searchInput.value.toLowerCase(); // Obtener el término de búsqueda en minúsculas
-            
-         // Realizar la solicitud a la API para obtener los datos de los usuarios
-         fetch(`${API_URL}/users`)
-            .then((response) => response.json()) // Parsear la respuesta como JSON
-            .then((users) => {
-                    // Verificar si el nombre ingresado por el usuario está presente en los datos de los usuarios
-                    const foundUser = users.find(user => user.name.toLowerCase() === searchTerm);
-    
-                    if (foundUser) {
-                        // Si se encuentra el usuario, redirigir a la otra página
-                        window.location.href = 'otra_pagina.html';
-                    } else {
-                        // Si no se encuentra el usuario, mostrar un mensaje de error
-                        alert("El nombre ingresado no existe");
-                    }
-            })
-            .catch(error => console.error('Error al obtener los datos de los usuarios:', error)); // Manejar errores de la solicitud a la API
-        }
-    });
+        manejarBusqueda();
+    }
+});
+// Asignar la función manejarBusqueda al evento "click" del botón de búsqueda
+const botonBusqueda = document.getElementById("botonBusqueda"); // Suponiendo que el ID del botón de búsqueda es "botonBusqueda"
+botonBusqueda.addEventListener("click", manejarBusqueda);
