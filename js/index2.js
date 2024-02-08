@@ -37,18 +37,18 @@ async function fetchComments() {
         const comments = await response.json();
 
         // Creo un nuevo elemento de lista no ordenada
-        const ul = document.createElement("ul");
+        const ol = document.createElement("ol");
         const firstTenComments = comments.slice(0, 10); // Obtengo los primeros 10 comentarios
 
         // Itero sobre cada comentario y creo un elemento de lista con su contenido
         firstTenComments.forEach((comment) => {
             let elem = document.createElement("li");
             elem.appendChild(document.createTextNode(`${comment.body}`)); // Accedo al cuerpo del comentario
-            ul.appendChild(elem);
+            ol.appendChild(elem);
         });
 
         // Agrego la lista al elemento HTMLResponse
-        HTMLResponse.appendChild(ul);
+        HTMLResponse.appendChild(ol);
     } catch (error) {
         console.error('Error al obtener mis comentarios:', error);
     }
