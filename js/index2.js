@@ -1,59 +1,65 @@
-// Defino la constante para la URL base de la API
+// Definición de la URL de la API
 const API_URL = "https://jsonplaceholder.typicode.com";
 
-// Selecciono el elemento HTML con el id "app" y lo almaceno en la variable HTMLResponse
-const HTMLResponse = document.querySelector("#comments");
+// Seleccionar elementos HTML donde se mostrarán las fotos y los comentarios
+const contenedorComentarios = document.querySelector("#comments");
+const contenedorFotos = document.querySelector("#fotos");
 
-// Selecciono el elemento HTML con el id "fotos" y lo almaceno en la variable HTMLResponsePhoto
-const HTMLResponsePhoto = document.querySelector("#fotos");
-
-// Función para obtener las fotos desde la API
+// Función asincrónica para obtener fotos de la API
 async function fetchPhotos() {
     try {
-        // Obtengo los datos de las fotos desde la API
+        // Obtener la respuesta de la API para las fotos
         const response = await fetch(`${API_URL}/photos`);
+        
+        // Convertir la respuesta a formato JSON
         const photos = await response.json();
-
-        // Corto el array para obtener las primeras tres fotos
+        
+        // Obtener las primeras tres fotos
         const firstThreePhotos = photos.slice(0, 3);
-
-        // Creo un elemento img para cada foto y lo agrego a HTMLResponsePhoto
+        
+        // Para cada foto, crear un elemento <img> y agregarlo al DOM
         firstThreePhotos.forEach((photo) => {
             let imgElem = document.createElement("img");
             imgElem.src = photo.thumbnailUrl;
             imgElem.classList.add("foto");
-            HTMLResponsePhoto.appendChild(imgElem);
+            contenedorFotos.appendChild(imgElem);
         });
     } catch (error) {
+        // Manejar errores en caso de fallo en la obtención de fotos
         console.error('Error al obtener mis fotos:', error);
     }
 }
 
-// Función para obtener los comentarios desde la API
+// Función asincrónica para obtener comentarios de la API
 async function fetchComments() {
     try {
-        // Obtengo los datos de los comentarios desde la API
+        // Obtener la respuesta de la API para los comentarios
         const response = await fetch(`${API_URL}/comments`);
+        
+        // Convertir la respuesta a formato JSON
         const comments = await response.json();
-
-        // Creo un nuevo elemento de lista no ordenada
+        
+        // Crear una lista ordenada para almacenar los comentarios
         const ol = document.createElement("ol");
-        const firstTenComments = comments.slice(0, 10); // Obtengo los primeros 10 comentarios
-
-        // Itero sobre cada comentario y creo un elemento de lista con su contenido
+        
+        // Obtener los primeros diez comentarios
+        const firstTenComments = comments.slice(0, 10);
+        
+        // Para cada comentario, crear un elemento <li> y agregarlo a la lista
         firstTenComments.forEach((comment) => {
             let elem = document.createElement("li");
-            elem.appendChild(document.createTextNode(`${comment.body}`)); // Accedo al cuerpo del comentario
+            elem.appendChild(document.createTextNode(`${comment.body}`));
             ol.appendChild(elem);
         });
-
-        // Agrego la lista al elemento HTMLResponse
-        HTMLResponse.appendChild(ol);
+        
+        // Agregar la lista de comentarios al DOM
+        contenedorComentarios.appendChild(ol);
     } catch (error) {
+        // Manejar errores en caso de fallo en la obtención de comentarios
         console.error('Error al obtener mis comentarios:', error);
     }
 }
 
-// Llamo a las funciones para obtener las fotos y los usuarios
+// Llamar a las funciones para obtener fotos y comentarios cuando se carga la página
 fetchPhotos();
 fetchComments();

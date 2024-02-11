@@ -1,77 +1,71 @@
-// Defino la constante para la URL base de la API
+// URL de la API
 const API_URL = "https://jsonplaceholder.typicode.com";
 
-// Selecciono el elemento HTML con el id "app" y lo almaceno en la variable HTMLResponse
+// Obtengo elementos HTML
 const contenedorApp = document.getElementById("app");
-
-const searchInput = document.getElementById("searchInput");
-
-// Selecciono el elemento HTML con el id "fotos" y lo almaceno en la variable HTMLResponsePhoto
+const barraBusqueda = document.getElementById("searchInput");
 const contenedorFoto = document.getElementById("fotos");
 
-// Obtengo los datos de las fotos desde la API y muestro las primeras tres fotos
+// Realizo una solicitud a la API para obtener fotos
 fetch(`${API_URL}/photos`)
-    .then((response) => response.json()) // Parseo la respuesta como JSON
+    .then((response) => response.json()) 
     .then((photos) => {
-        // Corto el array para obtener las primeras tres fotos
+        // Selecciono las primeras tres fotos
         const firstThreePhotos = photos.slice(0, 3);
-        // Creo un elemento img para cada foto y lo agrego a HTMLResponsePhoto
+        // Creo un elemento img para cada foto y las agrego al contenedor de fotos en el HTML
         firstThreePhotos.forEach((photo) => {
             let imgElem = document.createElement("img");
-            imgElem.src = photo.url; // Establece el atributo src de la imagen con la URL de la foto
-            imgElem.className = "foto"; // agrega una clase CSS llamada "foto" al elemento img que se está creando dinámicamente
-            contenedorFoto.appendChild(imgElem); // Agrega la imagen al contenedor de fotos en el HTML
+            imgElem.src = photo.url; 
+            imgElem.className = "foto"; 
+            contenedorFoto.appendChild(imgElem); 
         });
     })
-    .catch(error => console.error('Error al obtener mis fotos:', error)); // Registro cualquier error que ocurra durante la operación fetch
+    .catch(error => console.error('Error al obtener mis fotos:', error)); 
 
-// Obtengo los datos de los usuarios desde la API y muestro sus nombres y correos en una lista
+// Realizo una solicitud a la API para obtener datos de usuarios
 fetch(`${API_URL}/users`)
-    .then((response) => response.json()) // Parseo la respuesta como JSON
+    .then((response) => response.json()) 
     .then((users) => {
-        // Creo un nuevo elemento de lista no ordenada
+        // Creo una lista para mostrar los nombres de los usuarios
         const ul = document.createElement("ul");
-        // Itero sobre cada usuario y creo un elemento de lista con su nombre y correo
+        // Itero sobre cada usuario y creo un elemento de lista con su nombre
         users.forEach((user) => {
-            let elem = document.createElement("li"); // Crea un nuevo elemento de lista
-            elem.innerText = user.name; // Agrega un nodo de texto con el nombre y el correo del usuario al elemento de lista
-            ul.appendChild(elem); // Agrega el elemento de lista al elemento de lista no ordenada (ul)
+            let elem = document.createElement("li");
+            elem.innerText = user.name; 
+            ul.appendChild(elem); 
         });
-        // Agrego la lista al elemento HTMLResponse
+        // Agrego la lista al contenedor de la aplicación en el HTML
         contenedorApp.appendChild(ul);
     })
-    .catch(error => console.error('Error al obtener mis usuarios:', error)); // Registro cualquier error que ocurra durante la operación fetch
+    .catch(error => console.error('Error al obtener mis usuarios:', error)); 
 
-    
+// Función para manejar la búsqueda de usuarios
 function manejarBusqueda() {
-
-    const searchTerm = searchInput.value.toLowerCase(); // Obtener el término de búsqueda en minúsculas
-
-    // Realizar la solicitud a la API para obtener los datos de los usuarios
+    const searchTerm = barraBusqueda.value.toLowerCase(); 
+    // Realizo una solicitud a la API para obtener datos de usuarios
     fetch(`${API_URL}/users`)
-        .then((respuesta) => respuesta.json()) // Parsear la respuesta como JSON
+        .then((respuesta) => respuesta.json()) 
         .then((usuarios) => {
-            // Verificar si el nombre ingresado por el usuario está presente en los datos de los usuarios
+            // Busco si el nombre ingresado está presente en los datos de los usuarios
             const usuarioEncontrado = usuarios.find(usuario => usuario.name.toLowerCase() === searchTerm);
-
             if (usuarioEncontrado) {
-                // Si se encuentra el usuario, redirigir a la otra página
-                // y pasar el correo del usuario como parámetro de la URL
+                // Si encuentro el usuario, redirijo a otra página y paso el correo del usuario como parámetro de la URL
                 window.location.href = `index3.html?correo=${usuarioEncontrado.email}`;
             } else {
-                // Si no se encuentra el usuario, mostrar un mensaje de error
+                // Si no encuentro el usuario, muestro un mensaje de error
                 alert("El nombre ingresado no existe");
             }
         })
-        .catch(error => console.error('Error al obtener los datos de los usuarios:', error)); // Manejar errores de la solicitud a la API
+        .catch(error => console.error('Error al obtener los datos de los usuarios:', error)); 
 }
 
-searchInput.addEventListener("keyup", (event) =>{
-
+// Agrego un evento para manejar la búsqueda cuando se presiona "Enter" en el campo de búsqueda
+barraBusqueda.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
         manejarBusqueda();
     }
 });
-// Asignar la función manejarBusqueda al evento "click" del botón de búsqueda
-const botonBusqueda = document.getElementById("botonBusqueda"); // Suponiendo que el ID del botón de búsqueda es "botonBusqueda"
+
+// Agrego un evento para manejar la búsqueda cuando se hace clic en el botón de búsqueda
+const botonBusqueda = document.getElementById("botonBusqueda"); 
 botonBusqueda.addEventListener("click", manejarBusqueda);
