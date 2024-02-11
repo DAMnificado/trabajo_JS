@@ -27,10 +27,15 @@ El proyecto consta de una página web que utiliza la API JSONPlaceholder para ob
 4. Puedes utilizar la barra de búsqueda para buscar un usuario por su nombre.
 5. Si encuentras el usuario, serás redirigido a otra página donde se muestra su correo.
 
-## Contribución
+## Errores
 
-Si deseas contribuir a este proyecto, ¡no dudes en abrir un issue o enviar un pull request!
+- Aprecerá un mensaje en forma de alerta en la parte superior de la pantalla siempre que:
+  
+1. Escribas un nombre en la barra de búsqueda que no aparezca en la lista y le des a buscar o pulses enter.
+2. No escribas nada y le des a buscar o pulses enter.
 
+- ⚠️⚠️⚠️Importante⚠️⚠️⚠️ Una vez el mensaje de error aparezca no podrás hacer nada hasta que le des a "Aceptar"
+  
 ## Autor
 
 Creado por DAMnificado.
