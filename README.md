@@ -1,4 +1,4 @@
-# Proyecto de Ejemplo
+# Práctica promesas y async/await
 
 Este es un proyecto de ejemplo que muestra cómo utilizar JavaScript para interactuar con una API y manipular elementos HTML dinámicamente en una página web.
 
